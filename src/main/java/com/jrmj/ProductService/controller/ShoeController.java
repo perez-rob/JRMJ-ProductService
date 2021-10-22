@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,5 +55,14 @@ public class ShoeController {
         return shoeList;
     }
 
+    @DeleteMapping("/shoes/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public HashMap<String, String> deleteCustomer(@PathVariable Integer id) {
+        shoeRepo.deleteById(id);
+        HashMap<String, String> responseMsg = new HashMap<>();
+        responseMsg.put("status", "success");
+        responseMsg.put("message", "shoe " + id + " deleted.");
+        return responseMsg;
+    }
 
 }
